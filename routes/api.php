@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +18,9 @@ Route::get('patients', [PatientController::class, 'index']);
 Route::get('patients/{patient}', [PatientController::class, 'show']);
 Route::post('patients', [PatientController::class, 'store']);
 Route::put('patients/{patient}', [PatientController::class, 'update']);
-Route::delete('patients/{patient}', [PatientController::class, 'delete']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::delete('patients/{patient}', [PatientController::class, 'destroy']);
+Route::post('register', [RegisterController::class, 'register']);
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
