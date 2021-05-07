@@ -67,8 +67,4 @@ class LoginController extends Controller
         return response()->json(['data' => 'User logged out.'], 200);
     }
 
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return response()->json(['error' => 'Unauthenticated'], 401);
-    }
 }
