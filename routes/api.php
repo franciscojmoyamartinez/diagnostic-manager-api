@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DiagnosticController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 /*
@@ -23,7 +24,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     Route::get('patients', [PatientController::class, 'index']);
     Route::get('patients/{patient}', [PatientController::class, 'show']);
+    Route::get('diagnostic/{patient}', [DiagnosticController::class, 'show']);
     Route::post('patients', [PatientController::class, 'store']);
+    Route::post('diagnostic', [DiagnosticController::class, 'store']);
     Route::put('patients/{patient}', [PatientController::class, 'update']);
     Route::delete('patients/{patient}', [PatientController::class, 'destroy']);
 

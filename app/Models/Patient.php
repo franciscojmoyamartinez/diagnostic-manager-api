@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    protected $fillable = ['fullname', 'governmentId'];
     use HasFactory;
+
+    protected $fillable = ['fullname', 'governmentId'];
+
+    public function diagnostics(){
+        return $this->hasMany('App\Models\Diagnostic');
+    }
 }
