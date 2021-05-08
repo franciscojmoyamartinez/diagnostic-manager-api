@@ -19,13 +19,14 @@ class DiagnosticController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource by patientId.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getAllDiagnosticByPatientId(Request $request)
     {
-        //
+        return Diagnostic::where('patient_id',$request->patientId)->get();
     }
 
     /**
