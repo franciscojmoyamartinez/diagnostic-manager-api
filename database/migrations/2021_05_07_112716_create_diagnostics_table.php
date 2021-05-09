@@ -18,8 +18,8 @@ class CreateDiagnosticsTable extends Migration
             $table->string('diagnostic');
             $table->string('description');
             $table->date('date_diagnostic');
-            $table->unsignedBigInteger('patient_id');
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->unsignedBigInteger('patientId');
+            $table->foreign('patientId')->references('id')->on('patients');
 
             $table->timestamps();
         });

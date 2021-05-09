@@ -9,8 +9,11 @@ class Clinic extends Model
 {
     use HasFactory;
 
-    public function clinicsUsers()
-    {
+    public function clinicsUsers(){
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function patients(){
+        return $this->hasMany('App\Models\Patient');
     }
 }

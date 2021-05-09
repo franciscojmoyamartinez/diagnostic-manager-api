@@ -9,9 +9,14 @@ class Patient extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fullname', 'governmentId'];
+    protected $fillable = ['fullname', 'governmentId','clinicId'];
 
     public function diagnostics(){
         return $this->hasMany('App\Models\Diagnostic');
+    }
+    public function clinic()
+    {
+        // laravel assumes user_id as foreign and local key.
+        return $this->belongsTo('App\Models\Clinic');
     }
 }

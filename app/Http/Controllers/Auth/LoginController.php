@@ -47,8 +47,10 @@ class LoginController extends Controller
             $user = $this->guard()->user();
             $user->generateToken();
 
+            $user['clinic'] = $user->usersClinic()->get();
+            
             return response()->json([
-                'data' => $user->toArray(),
+                'user' => $user->toArray(),
             ]);
         }
 

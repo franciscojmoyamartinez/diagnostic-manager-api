@@ -53,6 +53,17 @@ class PatientController extends Controller
     }
 
     /**
+     * Display a listing of the patients by clinicId.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllPatientsByClinicId(Request $request)
+    {
+        return Patient::where('clinicId',$request->clinicId)->get();
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

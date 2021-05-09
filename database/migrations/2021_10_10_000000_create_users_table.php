@@ -25,10 +25,10 @@ class CreateUsersTable extends Migration
 
         Schema::create('clinic_user', function (Blueprint $table) {
             $table->id();
-            $table->foreign('clinic_id')->references('id')->on('clinics');
-            $table->unsignedBigInteger('clinic_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('user_id');
+            $table->foreign('clinicId')->references('id')->on('clinics');
+            $table->unsignedBigInteger('clinicId');
+            $table->foreign('userId')->references('id')->on('users');
+            $table->unsignedBigInteger('userId');
             $table->timestamps();
         });
     }
