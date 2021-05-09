@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function usersClinic()
+    {
+        return $this->belongsToMany(Clinic::class)->withTimestamps();
+    }
+
     public function generateToken()
     {
         $this->api_token = Str::random(60);
