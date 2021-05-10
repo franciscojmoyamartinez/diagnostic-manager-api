@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagnostic;
+use App\Models\History;
 use Illuminate\Http\Request;
 
 class DiagnosticController extends Controller
@@ -39,6 +40,10 @@ class DiagnosticController extends Controller
     {
         $diagnostic = Diagnostic::create($request->all());
 
+        History::create([
+            'description' => 'Diagnostic created',
+            'patientId' => $request->patient_id
+        ]);
         return response()->json($diagnostic, 201);
     }
 

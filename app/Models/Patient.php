@@ -14,6 +14,10 @@ class Patient extends Model
     public function diagnostics(){
         return $this->hasMany('App\Models\Diagnostic');
     }
+
+    public function history(){
+        return $this->hasMany('App\Models\History');
+    }
     public function clinic()
     {
         // laravel assumes user_id as foreign and local key.

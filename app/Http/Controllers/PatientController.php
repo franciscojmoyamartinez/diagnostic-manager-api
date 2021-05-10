@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\History;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -38,6 +39,10 @@ class PatientController extends Controller
     {
         $patient = Patient::create($request->all());
 
+        History::create([
+            'description' => 'Patient created',
+            'patientId' => $patient->id
+        ]);
         return response()->json($patient, 201);
     }
 
@@ -73,6 +78,11 @@ class PatientController extends Controller
     public function update(Request $request, Patient $patient)
     {
         $patient->update($request->all());
+
+        History::create([
+            'description' => 'Patient updated',
+            'patientId' => $patient->id
+        ]);
 
         return response()->json($patient, 200);
     }

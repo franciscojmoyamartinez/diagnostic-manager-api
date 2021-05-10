@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DiagnosticController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 /*
@@ -28,6 +29,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('patients/clinic/{clinicId}', [PatientController::class, 'getAllPatientsByClinicId']);
     Route::get('patients/{patient}', [PatientController::class, 'show']);
     Route::get('diagnostic/{patientId}', [DiagnosticController::class, 'getAllDiagnosticByPatientId']);
+    Route::get('/history/{patientId}', [HistoryController::class, 'index']);
     Route::post('patients', [PatientController::class, 'store']);
     Route::post('diagnostic', [DiagnosticController::class, 'store']);
     Route::put('patients/{patient}', [PatientController::class, 'update']);
