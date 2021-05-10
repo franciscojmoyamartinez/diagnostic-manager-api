@@ -26,7 +26,7 @@ class DiagnosticController extends Controller
      */
     public function getAllDiagnosticByPatientId(Request $request)
     {
-        return Diagnostic::where('patientId',$request->patientId)->get();
+        return Diagnostic::where('patient_Id',$request->patientId)->get();
     }
 
     /**
