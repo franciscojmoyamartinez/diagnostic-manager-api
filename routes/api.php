@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DiagnosticController;
+use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 /*
@@ -23,6 +24,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth:api'], function() {
 
     Route::get('patients', [PatientController::class, 'index']);
+    Route::get('clinics', [ClinicController::class, 'index']);
     Route::get('patients/clinic/{clinicId}', [PatientController::class, 'getAllPatientsByClinicId']);
     Route::get('patients/{patient}', [PatientController::class, 'show']);
     Route::get('diagnostic/{patientId}', [DiagnosticController::class, 'getAllDiagnosticByPatientId']);
