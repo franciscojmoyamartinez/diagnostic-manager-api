@@ -17,9 +17,9 @@ class CreateDiagnosticsTable extends Migration
             $table->id();
             $table->string('diagnostic');
             $table->string('description');
-            $table->date('date_diagnostic');
+            $table->date('dateDiagnostic');
             $table->unsignedBigInteger('patientId');
-            $table->foreign('patientId')->references('id')->on('patients');
+            $table->foreign('patientId')->references('id')->on('patients')->onDelete('cascade');
 
             $table->timestamps();
         });
