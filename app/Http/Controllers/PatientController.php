@@ -77,8 +77,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        $patient->update($request->all());
-
+        $patientUpdated = $patient->update($request->all());
         History::create([
             'description' => 'Patient updated',
             'patientId' => $patient->id

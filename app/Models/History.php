@@ -16,4 +16,8 @@ class History extends Model
         // laravel assumes user_id as foreign and local key.
         return $this->belongsTo('App\Models\Patient');
     }
+
+    protected $casts = [
+        'created_at' => "datetime:Y-m-d\TH:i",
+    ];
 }
