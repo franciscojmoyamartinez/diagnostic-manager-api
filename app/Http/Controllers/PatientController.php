@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\History;
+use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
@@ -62,8 +64,17 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show(Request $request, Patient $patient)
     {
+        $bearerToken =  Auth::user()->api_token;
+        $user = User::where('api_token',$bearerToken)->first();
+        $clinic = $user->usersClinic()->get();
+
+
+        if($patient->clinicId !== $clinic[0]->id){
+            return response()->json(['Error' => 'Not authorized'], 401);
+        }
+
         return $patient;
     }
 
