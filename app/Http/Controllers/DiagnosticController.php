@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Diagnostic;
 use App\Models\History;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class DiagnosticController extends Controller
 {
@@ -37,9 +38,16 @@ class DiagnosticController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $diagnostic = Diagnostic::create($request->all());
-
+    {   
+        $validated = $request->validate([
+            'diagnostic' => 'required|min:1|max:255',
+            'description' => 'required|min:1|max:255'
+        ]);
+        try{
+            $diagnostic = Diagnostic::create($request->all());
+        }catch (QueryException $e){
+            return response()->json(['error' => 'SQL Error patient not exists'], 422);
+        }
         History::create([
             'description' => 'Diagnostic created',
             'patientId' => $request->patient_id

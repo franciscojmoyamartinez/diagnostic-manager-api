@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\History;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class PatientController extends Controller
 {
@@ -36,9 +37,18 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $patient = Patient::create($request->all());
-
+    {   
+        // Validate
+        $validated = $request->validate([
+            'fullname' => 'required|min:1|max:255',
+            'governmentId' => 'required|min:9',
+            'clinicId' => 'required|integer'
+        ]);
+        try{
+            $patient = Patient::create($request->all());
+        }catch (QueryException $e){
+            return response()->json(['error' => 'The patient already exists'], 422);
+        }
         History::create([
             'description' => 'Patient created',
             'patientId' => $patient->id
@@ -77,7 +87,15 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        $patientUpdated = $patient->update($request->all());
+        $validated = $request->validate([
+            'fullname' => 'required|min:1|max:255',
+            'governmentId' => 'required|min:9'
+        ]);
+        try{
+            $patientUpdated = $patient->update($request->all());
+        }catch (QueryException $e){
+            return response()->json(['error' => 'The patient already exists'], 422);
+        }
         History::create([
             'description' => 'Patient updated',
             'patientId' => $patient->id
